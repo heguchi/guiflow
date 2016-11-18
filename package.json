@@ -20,9 +20,11 @@
   "homepage": "https://github.com/hirokidaichi/guiflow",
   "dependencies": {
     "dialogs": "^1.1.12",
+    "electron-config": "^0.2.1",
     "electron-debug": "^0.5.2",
     "electron-windows-installer": "^1.2.5",
     "flumine": "^0.1.8",
+    "path": "^0.12.7",
     "sprintf": "^0.1.5",
     "through2": "^2.0.1",
     "uiflow": "^1.1.1"
@@ -30,8 +32,8 @@
   "devDependencies": {
     "ace-min-noconflict": "^1.1.9",
     "del": "^2.2.0",
-    "electron-packager": "^6.0.0",
-    "electron-prebuilt": "^0.36.9",
+    "electron-packager": "^6.0.2",
+    "electron-prebuilt": "^0.36.12",
     "gulp": "^3.9.1",
     "gulp-shell": "^0.5.2",
     "gulp-zip": "^3.2.0",

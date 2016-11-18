@@ -4,6 +4,10 @@ var app = electron.app;
 var BrowserWindow = electron.BrowserWindow;
 var Menu = electron.Menu;
 var dialog = electron.dialog;
+const Config = require('electron-config');
+const config = new Config();
+const path = require('path');
+
 app.on('window-all-closed', function() {
     app.quit();
 });
@@ -80,7 +84,7 @@ var fileMenu = {
         accelerator: 'CmdOrCtrl+O',
         click: function() {
             dialog.showOpenDialog({
-                defaultPath: app.getPath('userDesktop'),
+                defaultPath: getRecentDirectory(),
                 properties: ['openFile'],
                 filters: [{
                     name: 'Documents',
@@ -88,11 +92,11 @@ var fileMenu = {
                 }, ],
             }, function(fileNames) {
                 if (fileNames) {
+                    setRecentDirectory(fileNames[0]);
                     createWindow(fileNames[0]);
                 }
             });
         },
-
     }, {
         label: "Save",
         accelerator: 'CmdOrCtrl+S',
@@ -158,6 +162,15 @@ var createWindow = function(fileName) {
     if (process.env.DEBUG) {
         mainWindow.toggleDevTools();
     }
+};
+
+var getRecentDirectory = function() {
+  if (!config.has('recentDirectory')) config.set('recentDirectory', app.getPath('userDesktop'));
+  return config.get('recentDirectory');
+};
+
+var setRecentDirectory = function(filepath) {
+  config.set('recentDirectory', path.dirname(filepath));
 };
 
 app.on('ready', function() {
